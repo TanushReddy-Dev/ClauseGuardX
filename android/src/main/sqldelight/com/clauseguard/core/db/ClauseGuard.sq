@@ -1,0 +1,39 @@
+-- ClauseGuardDatabase schema
+
+-- -- ContractEntity table stores contract metadata extracted from PDFs
+CREATE TABLE ContractEntity (
+    id TEXT PRIMARY KEY,
+    documentHash TEXT NOT NULL,
+    filename TEXT NOT NULL,
+    riskScore INTEGER,
+    createdAt TEXT NOT NULL
+);
+
+-- -- ClauseEntity table stores individual clause extractions linked to a contract
+CREATE TABLE ClauseEntity (
+    id TEXT PRIMARY KEY,
+    contractId TEXT NOT NULL,
+    clauseNumber INTEGER,
+    category TEXT NOT NULL,
+    originalText TEXT NOT NULL,
+    riskLevel TEXT NOT NULL,
+    explanation TEXT NOT NULL,
+    negotiationStrategy TEXT NOT NULL,
+    FOREIGN KEY(contractId) REFERENCES ContractEntity(id) ON DELETE CASCADE
+);
+
+-- -- Standard queries
+
+-- Insert a new contract record
+INSERT INTO ContractEntity (id, documentHash, filename, riskScore, createdAt)
+VALUES ($id, $documentHash, $filename, $riskScore, $createdAt);
+
+-- Insert a new clause record
+INSERT INTO ClauseEntity (id, contractId, clauseNumber, category, originalText, riskLevel, explanation, negotiationStrategy)
+VALUES ($id, $contractId, $clauseNumber, $category, $originalText, $riskLevel, $explanation, $negotiationStrategy);
+
+-- Retrieve a contract by its primary key (id)
+SELECT * FROM ContractEntity WHERE id = $id;
+
+-- Retrieve all clauses associated with a given contract
+SELECT * FROM ClauseEntity WHERE contractId = $contractId;
