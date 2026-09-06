@@ -1,0 +1,220 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.clauseguard.core"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="34" />
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->C:\Users\Tanus\Projects\ClauseGuardX\android\app\src\main\AndroidManifest.xml:4:5-67
+11-->C:\Users\Tanus\Projects\ClauseGuardX\android\app\src\main\AndroidManifest.xml:4:22-64
+12
+13    <permission
+13-->[androidx.core:core:1.12.0] C:\Users\Tanus\.gradle\caches\transforms-4\2bcec7a66f851759f0738f1aece749a1\transformed\core-1.12.0\AndroidManifest.xml:22:5-24:47
+14        android:name="com.clauseguard.core.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+14-->[androidx.core:core:1.12.0] C:\Users\Tanus\.gradle\caches\transforms-4\2bcec7a66f851759f0738f1aece749a1\transformed\core-1.12.0\AndroidManifest.xml:23:9-81
+15        android:protectionLevel="signature" />
+15-->[androidx.core:core:1.12.0] C:\Users\Tanus\.gradle\caches\transforms-4\2bcec7a66f851759f0738f1aece749a1\transformed\core-1.12.0\AndroidManifest.xml:24:9-44
+16
+17    <uses-permission android:name="com.clauseguard.core.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" /> <!-- Although the *SdkVersion is captured in gradle build files, this is required for non gradle builds -->
+17-->[androidx.core:core:1.12.0] C:\Users\Tanus\.gradle\caches\transforms-4\2bcec7a66f851759f0738f1aece749a1\transformed\core-1.12.0\AndroidManifest.xml:26:5-97
+17-->[androidx.core:core:1.12.0] C:\Users\Tanus\.gradle\caches\transforms-4\2bcec7a66f851759f0738f1aece749a1\transformed\core-1.12.0\AndroidManifest.xml:26:22-94
+18    <!-- <uses-sdk android:minSdkVersion="14"/> -->
+19    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+19-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Tanus\.gradle\caches\transforms-4\bffe18e19ac651a776da01ea7b82f013\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:25:5-79
+19-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Tanus\.gradle\caches\transforms-4\bffe18e19ac651a776da01ea7b82f013\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:25:22-76
+20
+21    <application
+21-->C:\Users\Tanus\Projects\ClauseGuardX\android\app\src\main\AndroidManifest.xml:6:5-22:19
+22        android:allowBackup="true"
+22-->C:\Users\Tanus\Projects\ClauseGuardX\android\app\src\main\AndroidManifest.xml:7:9-35
+23        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+23-->[androidx.core:core:1.12.0] C:\Users\Tanus\.gradle\caches\transforms-4\2bcec7a66f851759f0738f1aece749a1\transformed\core-1.12.0\AndroidManifest.xml:28:18-86
+24        android:debuggable="true"
+25        android:extractNativeLibs="false"
+26        android:icon="@mipmap/ic_launcher"
+26-->C:\Users\Tanus\Projects\ClauseGuardX\android\app\src\main\AndroidManifest.xml:8:9-43
+27        android:label="ClauseGuard"
+27-->C:\Users\Tanus\Projects\ClauseGuardX\android\app\src\main\AndroidManifest.xml:9:9-36
+28        android:roundIcon="@mipmap/ic_launcher_round"
+28-->C:\Users\Tanus\Projects\ClauseGuardX\android\app\src\main\AndroidManifest.xml:10:9-54
+29        android:supportsRtl="true"
+29-->C:\Users\Tanus\Projects\ClauseGuardX\android\app\src\main\AndroidManifest.xml:11:9-35
+30        android:theme="@style/Theme.ClauseGuard" >
+30-->C:\Users\Tanus\Projects\ClauseGuardX\android\app\src\main\AndroidManifest.xml:12:9-49
+31        <activity
+31-->C:\Users\Tanus\Projects\ClauseGuardX\android\app\src\main\AndroidManifest.xml:13:9-21:20
+32            android:name="com.clauseguard.core.MainActivity"
+32-->C:\Users\Tanus\Projects\ClauseGuardX\android\app\src\main\AndroidManifest.xml:14:13-41
+33            android:exported="true"
+33-->C:\Users\Tanus\Projects\ClauseGuardX\android\app\src\main\AndroidManifest.xml:15:13-36
+34            android:theme="@style/Theme.ClauseGuard" >
+34-->C:\Users\Tanus\Projects\ClauseGuardX\android\app\src\main\AndroidManifest.xml:16:13-53
+35            <intent-filter>
+35-->C:\Users\Tanus\Projects\ClauseGuardX\android\app\src\main\AndroidManifest.xml:17:13-20:29
+36                <action android:name="android.intent.action.MAIN" />
+36-->C:\Users\Tanus\Projects\ClauseGuardX\android\app\src\main\AndroidManifest.xml:18:17-69
+36-->C:\Users\Tanus\Projects\ClauseGuardX\android\app\src\main\AndroidManifest.xml:18:25-66
+37
+38                <category android:name="android.intent.category.LAUNCHER" />
+38-->C:\Users\Tanus\Projects\ClauseGuardX\android\app\src\main\AndroidManifest.xml:19:17-77
+38-->C:\Users\Tanus\Projects\ClauseGuardX\android\app\src\main\AndroidManifest.xml:19:27-74
+39            </intent-filter>
+40        </activity>
+41
+42        <service
+42-->[com.google.android.gms:play-services-mlkit-text-recognition-common:19.0.0] C:\Users\Tanus\.gradle\caches\transforms-4\9ccd53c1dbe3052fb6a887d46ef13394\transformed\jetified-play-services-mlkit-text-recognition-common-19.0.0\AndroidManifest.xml:9:9-15:19
+43            android:name="com.google.mlkit.common.internal.MlKitComponentDiscoveryService"
+43-->[com.google.android.gms:play-services-mlkit-text-recognition-common:19.0.0] C:\Users\Tanus\.gradle\caches\transforms-4\9ccd53c1dbe3052fb6a887d46ef13394\transformed\jetified-play-services-mlkit-text-recognition-common-19.0.0\AndroidManifest.xml:10:13-91
+44            android:directBootAware="true"
+44-->[com.google.mlkit:common:18.8.0] C:\Users\Tanus\.gradle\caches\transforms-4\a834915323896dad3db6264a17de4643\transformed\jetified-common-18.8.0\AndroidManifest.xml:17:13-43
+45            android:exported="false" >
+45-->[com.google.android.gms:play-services-mlkit-text-recognition-common:19.0.0] C:\Users\Tanus\.gradle\caches\transforms-4\9ccd53c1dbe3052fb6a887d46ef13394\transformed\jetified-play-services-mlkit-text-recognition-common-19.0.0\AndroidManifest.xml:11:13-37
+46            <meta-data
+46-->[com.google.android.gms:play-services-mlkit-text-recognition-common:19.0.0] C:\Users\Tanus\.gradle\caches\transforms-4\9ccd53c1dbe3052fb6a887d46ef13394\transformed\jetified-play-services-mlkit-text-recognition-common-19.0.0\AndroidManifest.xml:12:13-14:85
+47                android:name="com.google.firebase.components:com.google.mlkit.vision.text.internal.TextRegistrar"
+47-->[com.google.android.gms:play-services-mlkit-text-recognition-common:19.0.0] C:\Users\Tanus\.gradle\caches\transforms-4\9ccd53c1dbe3052fb6a887d46ef13394\transformed\jetified-play-services-mlkit-text-recognition-common-19.0.0\AndroidManifest.xml:13:17-114
+48                android:value="com.google.firebase.components.ComponentRegistrar" />
+48-->[com.google.android.gms:play-services-mlkit-text-recognition-common:19.0.0] C:\Users\Tanus\.gradle\caches\transforms-4\9ccd53c1dbe3052fb6a887d46ef13394\transformed\jetified-play-services-mlkit-text-recognition-common-19.0.0\AndroidManifest.xml:14:17-82
+49            <meta-data
+49-->[com.google.mlkit:vision-common:17.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\aeb733c64e7eb0cbe57714632669f240\transformed\jetified-vision-common-17.3.0\AndroidManifest.xml:12:13-14:85
+50                android:name="com.google.firebase.components:com.google.mlkit.vision.common.internal.VisionCommonRegistrar"
+50-->[com.google.mlkit:vision-common:17.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\aeb733c64e7eb0cbe57714632669f240\transformed\jetified-vision-common-17.3.0\AndroidManifest.xml:13:17-124
+51                android:value="com.google.firebase.components.ComponentRegistrar" />
+51-->[com.google.mlkit:vision-common:17.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\aeb733c64e7eb0cbe57714632669f240\transformed\jetified-vision-common-17.3.0\AndroidManifest.xml:14:17-82
+52            <meta-data
+52-->[com.google.mlkit:common:18.8.0] C:\Users\Tanus\.gradle\caches\transforms-4\a834915323896dad3db6264a17de4643\transformed\jetified-common-18.8.0\AndroidManifest.xml:20:13-22:85
+53                android:name="com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar"
+53-->[com.google.mlkit:common:18.8.0] C:\Users\Tanus\.gradle\caches\transforms-4\a834915323896dad3db6264a17de4643\transformed\jetified-common-18.8.0\AndroidManifest.xml:21:17-120
+54                android:value="com.google.firebase.components.ComponentRegistrar" />
+54-->[com.google.mlkit:common:18.8.0] C:\Users\Tanus\.gradle\caches\transforms-4\a834915323896dad3db6264a17de4643\transformed\jetified-common-18.8.0\AndroidManifest.xml:22:17-82
+55        </service>
+56
+57        <provider
+57-->[com.google.mlkit:common:18.8.0] C:\Users\Tanus\.gradle\caches\transforms-4\a834915323896dad3db6264a17de4643\transformed\jetified-common-18.8.0\AndroidManifest.xml:9:9-13:38
+58            android:name="com.google.mlkit.common.internal.MlKitInitProvider"
+58-->[com.google.mlkit:common:18.8.0] C:\Users\Tanus\.gradle\caches\transforms-4\a834915323896dad3db6264a17de4643\transformed\jetified-common-18.8.0\AndroidManifest.xml:10:13-78
+59            android:authorities="com.clauseguard.core.mlkitinitprovider"
+59-->[com.google.mlkit:common:18.8.0] C:\Users\Tanus\.gradle\caches\transforms-4\a834915323896dad3db6264a17de4643\transformed\jetified-common-18.8.0\AndroidManifest.xml:11:13-69
+60            android:exported="false"
+60-->[com.google.mlkit:common:18.8.0] C:\Users\Tanus\.gradle\caches\transforms-4\a834915323896dad3db6264a17de4643\transformed\jetified-common-18.8.0\AndroidManifest.xml:12:13-37
+61            android:initOrder="99" />
+61-->[com.google.mlkit:common:18.8.0] C:\Users\Tanus\.gradle\caches\transforms-4\a834915323896dad3db6264a17de4643\transformed\jetified-common-18.8.0\AndroidManifest.xml:13:13-35
+62
+63        <activity
+63-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Tanus\.gradle\caches\transforms-4\bfbe753b4e7d8216afc3922c201bdbaf\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:20:9-22:45
+64            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+64-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Tanus\.gradle\caches\transforms-4\bfbe753b4e7d8216afc3922c201bdbaf\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:20:19-85
+65            android:exported="false"
+65-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Tanus\.gradle\caches\transforms-4\bfbe753b4e7d8216afc3922c201bdbaf\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:22:19-43
+66            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+66-->[com.google.android.gms:play-services-base:18.1.0] C:\Users\Tanus\.gradle\caches\transforms-4\bfbe753b4e7d8216afc3922c201bdbaf\transformed\jetified-play-services-base-18.1.0\AndroidManifest.xml:21:19-78
+67
+68        <meta-data
+68-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Tanus\.gradle\caches\transforms-4\2336e89649d2091fba49f4beac7dd19a\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:21:9-23:69
+69            android:name="com.google.android.gms.version"
+69-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Tanus\.gradle\caches\transforms-4\2336e89649d2091fba49f4beac7dd19a\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:22:13-58
+70            android:value="@integer/google_play_services_version" />
+70-->[com.google.android.gms:play-services-basement:18.1.0] C:\Users\Tanus\.gradle\caches\transforms-4\2336e89649d2091fba49f4beac7dd19a\transformed\jetified-play-services-basement-18.1.0\AndroidManifest.xml:23:13-66
+71
+72        <provider
+72-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\c0a338807a4050270bbeb93650a7fa97\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+73            android:name="androidx.startup.InitializationProvider"
+73-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\c0a338807a4050270bbeb93650a7fa97\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:25:13-67
+74            android:authorities="com.clauseguard.core.androidx-startup"
+74-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\c0a338807a4050270bbeb93650a7fa97\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:26:13-68
+75            android:exported="false" >
+75-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\c0a338807a4050270bbeb93650a7fa97\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:27:13-37
+76            <meta-data
+76-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\c0a338807a4050270bbeb93650a7fa97\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+77                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+77-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\c0a338807a4050270bbeb93650a7fa97\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:30:17-75
+78                android:value="androidx.startup" />
+78-->[androidx.emoji2:emoji2:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\c0a338807a4050270bbeb93650a7fa97\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:31:17-49
+79            <meta-data
+79-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\Tanus\.gradle\caches\transforms-4\7e14aed15abf7f06cf38234bbff3dde5\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:29:13-31:52
+80                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+80-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\Tanus\.gradle\caches\transforms-4\7e14aed15abf7f06cf38234bbff3dde5\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:30:17-78
+81                android:value="androidx.startup" />
+81-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\Tanus\.gradle\caches\transforms-4\7e14aed15abf7f06cf38234bbff3dde5\transformed\jetified-lifecycle-process-2.7.0\AndroidManifest.xml:31:17-49
+82            <meta-data
+82-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\dd7d4b2da9a5cd358d359546bda07ea5\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
+83                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+83-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\dd7d4b2da9a5cd358d359546bda07ea5\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
+84                android:value="androidx.startup" />
+84-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\dd7d4b2da9a5cd358d359546bda07ea5\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
+85        </provider>
+86
+87        <receiver
+87-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\dd7d4b2da9a5cd358d359546bda07ea5\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
+88            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+88-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\dd7d4b2da9a5cd358d359546bda07ea5\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
+89            android:directBootAware="false"
+89-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\dd7d4b2da9a5cd358d359546bda07ea5\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
+90            android:enabled="true"
+90-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\dd7d4b2da9a5cd358d359546bda07ea5\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
+91            android:exported="true"
+91-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\dd7d4b2da9a5cd358d359546bda07ea5\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
+92            android:permission="android.permission.DUMP" >
+92-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\dd7d4b2da9a5cd358d359546bda07ea5\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
+93            <intent-filter>
+93-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\dd7d4b2da9a5cd358d359546bda07ea5\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
+94                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+94-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\dd7d4b2da9a5cd358d359546bda07ea5\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
+94-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\dd7d4b2da9a5cd358d359546bda07ea5\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
+95            </intent-filter>
+96            <intent-filter>
+96-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\dd7d4b2da9a5cd358d359546bda07ea5\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
+97                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+97-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\dd7d4b2da9a5cd358d359546bda07ea5\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
+97-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\dd7d4b2da9a5cd358d359546bda07ea5\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
+98            </intent-filter>
+99            <intent-filter>
+99-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\dd7d4b2da9a5cd358d359546bda07ea5\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
+100                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+100-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\dd7d4b2da9a5cd358d359546bda07ea5\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
+100-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\dd7d4b2da9a5cd358d359546bda07ea5\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
+101            </intent-filter>
+102            <intent-filter>
+102-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\dd7d4b2da9a5cd358d359546bda07ea5\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
+103                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+103-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\dd7d4b2da9a5cd358d359546bda07ea5\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
+103-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Tanus\.gradle\caches\transforms-4\dd7d4b2da9a5cd358d359546bda07ea5\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
+104            </intent-filter>
+105        </receiver>
+106
+107        <service
+107-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Tanus\.gradle\caches\transforms-4\bffe18e19ac651a776da01ea7b82f013\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:29:9-35:19
+108            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+108-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Tanus\.gradle\caches\transforms-4\bffe18e19ac651a776da01ea7b82f013\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:30:13-103
+109            android:exported="false" >
+109-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Tanus\.gradle\caches\transforms-4\bffe18e19ac651a776da01ea7b82f013\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:31:13-37
+110            <meta-data
+110-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Tanus\.gradle\caches\transforms-4\bffe18e19ac651a776da01ea7b82f013\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:32:13-34:39
+111                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+111-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Tanus\.gradle\caches\transforms-4\bffe18e19ac651a776da01ea7b82f013\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:33:17-94
+112                android:value="cct" />
+112-->[com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Tanus\.gradle\caches\transforms-4\bffe18e19ac651a776da01ea7b82f013\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:34:17-36
+113        </service>
+114        <service
+114-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Tanus\.gradle\caches\transforms-4\19798bba6efe408c7df7d17688620f8f\transformed\jetified-transport-runtime-2.2.6\AndroidManifest.xml:26:9-30:19
+115            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+115-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Tanus\.gradle\caches\transforms-4\19798bba6efe408c7df7d17688620f8f\transformed\jetified-transport-runtime-2.2.6\AndroidManifest.xml:27:13-117
+116            android:exported="false"
+116-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Tanus\.gradle\caches\transforms-4\19798bba6efe408c7df7d17688620f8f\transformed\jetified-transport-runtime-2.2.6\AndroidManifest.xml:28:13-37
+117            android:permission="android.permission.BIND_JOB_SERVICE" >
+117-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Tanus\.gradle\caches\transforms-4\19798bba6efe408c7df7d17688620f8f\transformed\jetified-transport-runtime-2.2.6\AndroidManifest.xml:29:13-69
+118        </service>
+119
+120        <receiver
+120-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Tanus\.gradle\caches\transforms-4\19798bba6efe408c7df7d17688620f8f\transformed\jetified-transport-runtime-2.2.6\AndroidManifest.xml:32:9-34:40
+121            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+121-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Tanus\.gradle\caches\transforms-4\19798bba6efe408c7df7d17688620f8f\transformed\jetified-transport-runtime-2.2.6\AndroidManifest.xml:33:13-132
+122            android:exported="false" />
+122-->[com.google.android.datatransport:transport-runtime:2.2.6] C:\Users\Tanus\.gradle\caches\transforms-4\19798bba6efe408c7df7d17688620f8f\transformed\jetified-transport-runtime-2.2.6\AndroidManifest.xml:34:13-37
+123    </application>
+124
+125</manifest>

@@ -1,6 +1,5 @@
 package com.clauseguard.core
 
-import android.app.Activity
 import android.content.res.AssetFileDescriptor
 import android.os.Bundle
 import android.util.Log
@@ -10,32 +9,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.disposable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.Size
-import com.google.android.gms.vision.text.TextRecognizer
-import com.zeroc.dev.h2.H2Driver
-import com.zeroc.dev.h2.jdbc.JdbcSqliteDriver
+import androidx.lifecycle.lifecycleScope
+import com.clauseguard.core.data.network.KtorClient
+import com.clauseguard.core.data.repository.ContractRepositoryImpl
+import com.clauseguard.core.db.ClauseGuardDatabase
+import com.clauseguard.core.domain.usecase.AnalyzeContractUseCase
+import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import io.ktor.client.HttpClient
-import io.ktor.client.request.DeleteRequest
-import io.ktor.client.request.GetRequest
-import io.ktor.client.request.HeadRequest
-import io.ktor.client.request.OptionsRequest
-import io.ktor.client.request.PatchRequest
-import io.ktor.client.request.PutRequest
-import io.ktor.client.request.Request
-import io.ktor.client.request.RequestBuilder
-import io.ktor.client.requestl
-import io.ktor.client.routing.Get
-import io.ktor.client.routing.Routing
-import io.ktor.server.engine.Android
-import io.ktor.server.internal.Application
-import io.ktor.server.responders.Responder
-import io.ktor.server.router.get
-import io.ktor.server.router.Routing
-import io.ktor.server.web.WebApplication
-import javax.sql.DataSource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * Headless Execution Environment for ClauseGuard Core.
@@ -60,6 +43,7 @@ class MainActivity : ComponentActivity() {
     private lateinit var httpClient: HttpClient
     private lateinit var repository: ContractRepositoryImpl
     private lateinit var analyzeUseCase: AnalyzeContractUseCase
+    private lateinit var database: ClauseGuardDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,28 +52,17 @@ class MainActivity : ComponentActivity() {
          * Manual Dependency Graph — NO Compose UI initialization needed.
          * **************************************************************************/
 
-        // 1. SQLDelight AndroidSqliteDriver (in-memory for headless validation)
-        val androidSqliteDriver = JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
+        // 1. SQLDelight AndroidSqliteDriver
+        val driver = AndroidSqliteDriver(ClauseGuardDatabase.Schema, this, "test.db")
+        database = ClauseGuardDatabase(driver)
 
-        // 2. Ktor HttpClient — pointing to the local FastAPI backend.
-        //    In debug/emulator mode, the base URL uses 10.0.2.2 which forwards
-        //    to the host machine where the FastAPI server is running.
-        httpClient = io.ktor.client.HttpClient(
-            baseUrl = "http://10.0.2.2:8000/api/v1"
-        ).apply {
-            // Install default error handler so bad responses don't crash the app
-            install(io.ktor.client.features.ContentNegotiation) {
-                json(Json {
-                    ignoreUnknownKeys = true
-                    prettyPrint = true
-                })
-            }
-        }
+        // 2. Ktor HttpClient
+        httpClient = KtorClient.getClient(this)
 
         // 3. ContractRepositoryImpl bridges data (SQLDelight) and domain layers
         repository = ContractRepositoryImpl(
-            ktorClient = httpClient,
-            database = androidSqliteDriver
+            ktorClient = KtorClient,
+            database = database
         )
 
         // 4. AnalyzeContractUseCase orchestrates: OCR → text → hash → LLM analysis → persist
@@ -101,12 +74,8 @@ class MainActivity : ComponentActivity() {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 // Read dummy PDF from assets folder
-                val assetFileDescriptor: AssetFileDescriptor = assets.openFd("dummy_contract.pdf")
-                val inputStream = assets.openStream("dummy_contract.pdf")
-                val dummyBytes = inputStream?.readBytes() ?: run {
-                    Log.e("ClauseGuard-Core", "FAILED: Could not read dummy_contract.pdf from assets")
-                    return@launch
-                }
+                val inputStream = assets.open("dummy_contract.pdf")
+                val dummyBytes = inputStream.readBytes()
 
                 Log.d("ClauseGuard-Core", "Pipeline triggered with ${dummyBytes.size} bytes of dummy PDF data")
 

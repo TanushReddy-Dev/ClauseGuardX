@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ClauseGuard</string>
+    <style name="Theme.ClauseGuard" parent="android:Theme.Material.Light.NoActionBar">
+        
+        <item name="android:statusBarColor">#08090A</item>
+    </style>
+</resources>

@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.clauseguard.core.app-mergeDebugResources-47:/values-v16/values-v16.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Tanus\\.gradle\\caches\\transforms-4\\2bcec7a66f851759f0738f1aece749a1\\transformed\\core-1.12.0\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                }
+            ]
+        }
+    ]
+}

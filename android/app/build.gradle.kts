@@ -71,8 +71,8 @@ dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.9")
 
     // SQLDelight - Local Persistence
-    implementation("com.squareup.sqldelight:sqldelight-android:2.0.0")
-    implementation("com.squareup.sqldelight:sqlite-driver:2.0.0")
+    implementation("app.cash.sqldelight:android-driver:2.0.0")
+    implementation("app.cash.sqldelight:coroutines-extensions:2.0.0")
 
     // Google ML Kit Vision
     implementation("com.google.android.gms:play-services-mlkit-text-recognition:19.0.0")
@@ -90,7 +90,9 @@ dependencies {
 }
 
 sqldelight {
-    database("ClauseGuardDatabase") {
-        package = "com.clauseguard.core.db"
+    databases {
+        create("ClauseGuardDatabase") {
+            packageName.set("com.clauseguard.core.db")
+        }
     }
 }
