@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClauseGuard - Analysis Results v1</title>
+
+    <!-- Fonts: Inter Tight (Display), Inter (Body), JetBrains Mono (Tech/Meta) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS (Pinned CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Config for Linear-style Design System -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['"Inter Tight"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        ground: '#08090A',
+                        surface1: '#16171C',
+                        surface2: '#1E1F25',
+                        surface3: '#26272E',
+                        accent: '#5E6AD2',
+                        textPrimary: '#F7F8F8',
+                        textSecondary: '#9CA3AF',
+                        textMuted: '#6B7280',
+                        hairline: 'rgba(255, 255, 255, 0.06)',
+                        riskHigh: '#EF4444',
+                        riskMedium: '#F59E0B',
+                        riskLow: '#10B981',
+                    },
+                    boxShadow: {
+                        'soft': '0 1px 2px rgba(0, 0, 0, 0.3)',
+                    },
+                    borderRadius: {
+                        'md': '6px',
+                        'lg': '12px',
+                        'xl': '16px',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Motion & Interaction CSS -->
+    <style>
+        :root {
+            color-scheme: dark;
+            --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        body {
+            background-color: theme('colors.ground');
+            color: theme('colors.textPrimary');
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Press Feedback (Interruptible CSS Transition) */
+        .tap-target {
+            transition: transform 120ms var(--ease-out), background-color 150ms ease;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            /* Hint to browser that transform is imminent */
+            will-change: transform;
+        }
+
+        .tap-target:active {
+            transform: scale(0.97);
+            background-color: theme('colors.surface2');
+        }
+
+        /* Text utility */
+        .text-pretty {
+            text-wrap: pretty;
+        }
+
+        /* Glassmorphism */
+        .glass-header {
+            background-color: rgba(8, 9, 10, 0.75);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid theme('colors.hairline');
+            /* Ensure the shadow doesn't clash with the blur */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Mobile Frame */
+        .mobile-frame {
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            max-height: 850px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            background-color: theme('colors.ground');
+            border-left: 1px solid theme('colors.hairline');
+            border-right: 1px solid theme('colors.hairline');
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (min-width: 640px) {
+            body {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+                background-color: #000;
+            }
+            .mobile-frame {
+                height: 850px;
+                border: 1px solid theme('colors.hairline');
+                border-radius: 32px;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            }
+        }
+
+        /* Hiding scrollbar */
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .hide-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+
+    </style>
+
+    <!-- React, ReactDOM, Babel, Framer Motion -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/framer-motion@11.0.8/dist/framer-motion.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        const { motion, AnimatePresence } = window.Motion;
+
+        // --- Mock Data ---
+        const MOCK_CONTRACT = {
+            id: "d4e1d7f0e7a7e4c3b2",
+            filename: "MSA_AcmeCorp_2026_Final.pdf",
+            riskScore: 78,
+            clauses: [
+                {
+                    id: "c1",
+                    clauseNumber: 4,
+                    category: "Indemnification",
+                    riskLevel: "HIGH",
+                    originalText: "Client shall indemnify and hold harmless the Provider against any and all claims, damages, liabilities, costs, and expenses (including reasonable attorneys' fees) arising out of or related to the Client's use of the Services, regardless of Provider's own negligence.",
+                    explanation: "Broad, unilateral indemnification. You are forced to cover costs even if the Provider is at fault.",
+                    negotiationStrategy: "Require mutual indemnification. Carve out explicit exceptions for Provider's gross negligence or willful misconduct."
+                },
+                {
+                    id: "c2",
+                    clauseNumber: 9,
+                    category: "Termination for Convenience",
+                    riskLevel: "MEDIUM",
+                    originalText: "Provider may terminate this Agreement at any time for any reason upon thirty (30) days prior written notice to Client. Client may only terminate for material breach.",
+                    explanation: "Asymmetrical termination rights. They can walk away easily, but you are locked in.",
+                    negotiationStrategy: "Request mutual termination for convenience rights, or increase their notice period to 90 days."
+                },
+                {
+                    id: "c3",
+                    clauseNumber: 12,
+                    category: "Governing Law",
+                    riskLevel: "LOW",
+                    originalText: "This Agreement shall be governed by and construed in accordance with the laws of the State of Delaware.",
+                    explanation: "Standard governing law clause specifying Delaware jurisdiction.",
+                    negotiationStrategy: "Acceptable as is, unless counsel requires your home state jurisdiction."
+                }
+            ]
+        };
+
+        // --- Components ---
+
+        const Icon = ({ name, size = 20, className = "" }) => {
+            useEffect(() => { lucide.createIcons(); });
+            return <i data-lucide={name} style={{ width: size, height: size }} className={className}></i>;
+        };
+
+        const RiskBadge = ({ level }) => {
+            const config = {
+                HIGH: { color: 'text-riskHigh', bg: 'bg-riskHigh/10', icon: 'alert-triangle' },
+                MEDIUM: { color: 'text-riskMedium', bg: 'bg-riskMedium/10', icon: 'alert-circle' },
+                LOW: { color: 'text-riskLow', bg: 'bg-riskLow/10', icon: 'check-circle' }
+            }[level];
+
+            return (
+                <div className={`flex items-center gap-1.5 px-2 py-1 rounded-md ${config.bg} ${config.color} text-[11px] uppercase tracking-wide font-display font-semibold border border-current border-opacity-10`}>
+                    <Icon name={config.icon} size={12} />
+                    {level}
+                </div>
+            );
+        };
+
+        // Spring configuration (Apple-style critically damped)
+        const springTransition = {
+            type: "spring",
+            bounce: 0,       // No overshoot, professional UI
+            duration: 0.35   // Snappy but readable
+        };
+
+        const ClauseCard = ({ clause, isExpanded, onToggle, index }) => {
+            return (
+                <motion.div
+                    // Staggered Entrance Animation
+                    initial={{ opacity: 0, y: 16 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                        opacity: { duration: 0.3, ease: [0.23, 1, 0.32, 1] },
+                        y: { duration: 0.4, ease: [0.23, 1, 0.32, 1] },
+                        delay: index * 0.06 // 60ms stagger
+                    }}
+                    className="tap-target bg-surface1 border border-hairline rounded-lg overflow-hidden mb-4 shadow-soft"
+                    onClick={onToggle}
+                    layout // Animates layout changes (padding) smoothly
+                >
+                    {/* Header */}
+                    <motion.div layout="position" className="p-4 flex items-start justify-between gap-4">
+                        <div className="flex-1">
+                            <div className="flex items-center gap-2 mb-1.5">
+                                <span className="font-mono text-[10px] text-textSecondary bg-surface2 px-1.5 py-0.5 rounded border border-hairline">
+                                    § {clause.clauseNumber}
+                                </span>
+                                <h3 className="font-medium text-textPrimary text-sm leading-tight">{clause.category}</h3>
+                            </div>
+
+                            {/* Snippet crossfades out when expanding */}
+                            <AnimatePresence initial={false}>
+                                {!isExpanded && (
+                                    <motion.p
+                                        initial={{ opacity: 0, height: 0 }}
+                                        animate={{ opacity: 1, height: "auto" }}
+                                        exit={{ opacity: 0, height: 0 }}
+                                        transition={{ duration: 0.2, ease: "easeOut" }}
+                                        className="text-sm text-textSecondary line-clamp-2 mt-2 leading-relaxed text-pretty"
+                                    >
+                                        {clause.originalText}
+                                    </motion.p>
+                                )}
+                            </AnimatePresence>
+                        </div>
+                        <motion.div layout="position">
+                            <RiskBadge level={clause.riskLevel} />
+                        </motion.div>
+                    </motion.div>
+
+                    {/* Expandable Body */}
+                    <AnimatePresence initial={false}>
+                        {isExpanded && (
+                            <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={springTransition}
+                                className="overflow-hidden"
+                            >
+                                <div className="px-4 pb-5 border-t border-hairline pt-4 bg-gradient-to-b from-surface1 to-surface2/30">
+                                    <div className="space-y-5">
+                                        <div>
+                                            <h4 className="text-[10px] uppercase tracking-widest font-semibold text-textMuted mb-2">Original Text</h4>
+                                            <p className="text-[13px] text-textSecondary leading-relaxed bg-surface2/60 p-3 rounded-md font-mono border border-hairline text-pretty">
+                                                {clause.originalText}
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <h4 className="text-[10px] uppercase tracking-widest font-semibold text-textMuted mb-2">Plain English</h4>
+                                            <p className="text-[14px] text-textPrimary leading-relaxed text-pretty">
+                                                {clause.explanation}
+                                            </p>
+                                        </div>
+                                        <div>
+                                            <h4 className="text-[10px] uppercase tracking-widest font-semibold text-accent mb-2 flex items-center gap-1.5">
+                                                <Icon name="zap" size={12} /> Strategy
+                                            </h4>
+                                            <div className="bg-accent/10 border border-accent/20 p-3.5 rounded-md relative overflow-hidden">
+                                                {/* Very subtle glow effect behind the strategy box */}
+                                                <div className="absolute top-0 right-0 w-24 h-24 bg-accent/20 blur-2xl rounded-full -mr-8 -mt-8 pointer-events-none"></div>
+                                                <p className="text-[14px] text-textPrimary leading-relaxed text-pretty relative z-10">
+                                                    {clause.negotiationStrategy}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </motion.div>
+            );
+        };
+
+        const AnalysisScreen = () => {
+            const [expandedClauseId, setExpandedClauseId] = useState(null);
+
+            const scoreColorClass = MOCK_CONTRACT.riskScore >= 70 ? 'text-riskHigh' :
+                                    MOCK_CONTRACT.riskScore >= 40 ? 'text-riskMedium' : 'text-riskLow';
+
+            return (
+                <div className="mobile-frame">
+
+                    {/* Sticky Header */}
+                    <header className="glass-header sticky top-0 z-20 px-4 py-4 pt-12 flex flex-col gap-4">
+                        <div className="flex items-center justify-between">
+                            <button className="tap-target p-2 -ml-2 text-textSecondary hover:text-textPrimary rounded-full">
+                                <Icon name="chevron-left" size={24} />
+                            </button>
+                            <div className="text-xs font-mono text-textMuted truncate max-w-[200px]">
+                                {MOCK_CONTRACT.filename}
+                            </div>
+                            <button className="tap-target p-2 -mr-2 text-textSecondary hover:text-textPrimary rounded-full">
+                                <Icon name="share" size={20} />
+                            </button>
+                        </div>
+
+                        <div className="flex items-end gap-3 pb-2">
+                            <div>
+                                <div className="text-[10px] font-semibold text-textMuted uppercase tracking-widest mb-1.5">Overall Risk</div>
+                                {/* Peak Moment Entrance Animation for the Score */}
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.9, y: 5 }}
+                                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                                    transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }}
+                                    className={`font-display font-semibold text-[56px] leading-none tracking-tighter ${scoreColorClass}`}
+                                >
+                                    {MOCK_CONTRACT.riskScore}
+                                </motion.div>
+                            </div>
+                            <div className="mb-2 text-sm text-textSecondary font-medium">/ 100</div>
+                        </div>
+                    </header>
+
+                    {/* Scrollable Content */}
+                    <main className="flex-1 overflow-y-auto hide-scroll p-4 pb-28">
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.3, delay: 0.1 }}
+                            className="flex items-center justify-between mb-5 mt-2"
+                        >
+                            <h2 className="text-sm font-medium text-textPrimary tracking-tight">
+                                Identified Clauses ({MOCK_CONTRACT.clauses.length})
+                            </h2>
+                            <button
+                                className="tap-target text-[11px] font-semibold text-textMuted hover:text-textPrimary uppercase tracking-wider px-2 py-1 rounded"
+                                onClick={() => setExpandedClauseId(null)}
+                            >
+                                Collapse All
+                            </button>
+                        </motion.div>
+
+                        <div className="relative">
+                            {MOCK_CONTRACT.clauses.map((clause, idx) => (
+                                <ClauseCard
+                                    key={clause.id}
+                                    index={idx}
+                                    clause={clause}
+                                    isExpanded={expandedClauseId === clause.id}
+                                    onToggle={() => setExpandedClauseId(prev => prev === clause.id ? null : clause.id)}
+                                />
+                            ))}
+                        </div>
+                    </main>
+
+                    {/* Bottom Action Bar */}
+                    <div className="absolute bottom-0 left-0 right-0 p-4 pb-6 bg-gradient-to-t from-ground via-ground to-transparent z-20 pointer-events-none">
+                        {/* We use pointer-events-none on the gradient wrapper, and restore it on the button */}
+                        <button className="tap-target pointer-events-auto w-full bg-accent text-white font-medium py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-[0_4px_14px_rgba(94,106,210,0.3)]">
+                            <Icon name="download" size={18} />
+                            Export Summary
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<AnalysisScreen />);
+    </script>
+</body>
+</html>
