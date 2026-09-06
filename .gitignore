@@ -1,1 +1,18 @@
 .env
+.agents/
+.claude/
+claude-android-skill/
+skills-lock.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.pytest_cache/
+
+# Android/Kotlin
+android/.gradle/
+android/build/
+android/local.properties
+android/.idea/
